@@ -1,10 +1,10 @@
 import Layout from "../components/layout";
-import { getSortedList } from "../lib/data.js";
+import { getSortedList } from "../lib/data-firebase";
 import { getSortedCats } from "../lib/data.js";
 import Link from "next/link";
 
 export async function getStaticProps() {
-  const allData = getSortedList();
+  const allData = await getSortedList();
   const moreData = getSortedCats();
   return {
     props: { allData, moreData },
@@ -19,7 +19,7 @@ export default function Home({ allData, moreData }) {
         {allData && allData.map(({ id, name }) => (
           <Link
             key={id}
-            href={`/${id}`}
+            href={`/dogs/${id}`}
             className="list-group-item list-group-item-action"
           >
             {name}
